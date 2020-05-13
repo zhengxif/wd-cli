@@ -1,0 +1,35 @@
+{
+  "name": "wd-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "babel src -d dist",
+    "watch": "npm run compile -- --watch"
+  },
+  "bin": {
+    "wd-cli": "./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhengxif/wd-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhengxif/wd-cli/issues"
+  },
+  "homepage": "https://github.com/zhengxif/wd-cli#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "download-git-repo": "^3.0.2",
+    "ini": "^1.3.5",
+    "inquirer": "^7.1.0",
+    "ora": "^4.0.4",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5"
+  }
+}
