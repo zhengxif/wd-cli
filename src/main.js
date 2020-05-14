@@ -1,60 +1,45 @@
 import program from 'commander';
-import { VERSION } from './utils/constants'
-import main from './index'
-
-let actionMap = {
-    create: {
-        alias: 'c',
-        description: 'init template',
-        examples: [
-            'wd-cli create <packgename>',
-            'wd-cli c <packgename>'
-        ]
-    },
-    config: {
-        alias: 'conf',
-        description: 'config .wdclirc',
-        examples: [
-            'wd-cli config set <k> <v>',
-            'wd-cli config get <k>',
-            'wd-cli config remove <k>',
-        ]
-    },
-    '*': {
-        description: 'not found',
-        examples: []
-    }
-}
+import chalk from 'chalk';
+import { VERSION } from './utils/constants';
+import main from './index';
 
 
+program
+    .command('config [value]')
+    .description('inspect and modify the config')
+    .option('-g, --get <path>', 'get value from option')
+    .option('-s, --set <path> <value>', 'set option value')
+    .option('-d, --delete <path>', 'delete option from config')
+    .action(() => {
+        main('config', ...process.argv.slice(3))
+    })
 
+program
+    .command('create <app-name>')
+    .description('create a new project powered by wd-cli')
+    .action(() => {
+        main('create', ...process.argv.slice(3))
+    })
 
-Object.keys(actionMap).forEach(action => {
-    let { alias, description } = actionMap[action];
-    program.command(action)
-        .description(description)
-        .alias(alias)
-        .action(() => {
-            if (action === 'config') {
-                main(action, ...process.argv.slice(3));
-            } else if (action === 'create') {
-                main(action, ...process.argv.slice(3));
-            }
-        })
+// output help information on unknown commands
+program
+.arguments('<command>')
+.action((cmd) => {
+  program.outputHelp()
+  console.log(`  ` + chalk.red(`Unknown command ${chalk.yellow(cmd)}.`))
+  console.log()
 })
 
-function help() {
-    console.log('\r\n how to use command');
-    Object.keys(actionMap).forEach(action => {
-        let examples = actionMap[action].examples;
-        examples.forEach( example => {
-            console.log(" - " + example);
-        })
-    })
+// add some useful info on help
+program.on('--help', () => {
+    console.log()
+    console.log(`  Run ${chalk.cyan(`wd-cli <command> --help`)} for detailed usage of given command.`)
+    console.log()
+  })
+program.commands.forEach(c => c.on('--help', () => console.log()))
+program.version(VERSION, '-v --version');
+program.parse(process.argv)
+
+if (!process.argv.slice(2).length) {
+  program.outputHelp()
 }
-
-// 监听
-program.on('-h', help);
-program.on('--help', help);
-
-program.version(VERSION, '-v --version').parse(process.argv);

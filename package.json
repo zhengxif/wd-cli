@@ -1,6 +1,6 @@
 {
-  "name": "wd-cli",
-  "version": "1.0.0",
+  "name": "wdian-cli",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "url": "git+https://github.com/zhengxif/wd-cli.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "zhengxi",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/zhengxif/wd-cli/issues"
@@ -25,6 +25,8 @@
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
+    "chalk": "^4.0.0",
+    "commander": "^5.1.0",
     "consolidate": "^0.15.1",
     "download-git-repo": "^3.0.2",
     "ejs": "^3.1.2",
