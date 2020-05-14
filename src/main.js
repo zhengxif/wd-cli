@@ -3,16 +3,16 @@ import { VERSION } from './utils/constants'
 import main from './index'
 
 let actionMap = {
-    install: {
-        alias: 'i',
-        description: 'install template',
+    create: {
+        alias: 'c',
+        description: 'init template',
         examples: [
-            'wd-cli i',
-            'wd-cli install'
+            'wd-cli create <packgename>',
+            'wd-cli c <packgename>'
         ]
     },
     config: {
-        alias: 'c',
+        alias: 'conf',
         description: 'config .wdclirc',
         examples: [
             'wd-cli config set <k> <v>',
@@ -37,8 +37,8 @@ Object.keys(actionMap).forEach(action => {
         .action(() => {
             if (action === 'config') {
                 main(action, ...process.argv.slice(3));
-            } else if (action === 'install') {
-                main(action);
+            } else if (action === 'create') {
+                main(action, ...process.argv.slice(3));
             }
         })
 })
@@ -53,6 +53,7 @@ function help() {
     })
 }
 
+// 监听
 program.on('-h', help);
 program.on('--help', help);
 

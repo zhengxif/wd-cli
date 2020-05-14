@@ -9,13 +9,13 @@ var _index = _interopRequireDefault(require("./index"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 let actionMap = {
-  install: {
-    alias: 'i',
-    description: 'install template',
-    examples: ['wd-cli i', 'wd-cli install']
+  create: {
+    alias: 'c',
+    description: 'init template',
+    examples: ['wd-cli create <packgename>', 'wd-cli c <packgename>']
   },
   config: {
-    alias: 'c',
+    alias: 'conf',
     description: 'config .wdclirc',
     examples: ['wd-cli config set <k> <v>', 'wd-cli config get <k>', 'wd-cli config remove <k>']
   },
@@ -33,8 +33,8 @@ Object.keys(actionMap).forEach(action => {
   _commander.default.command(action).description(description).alias(alias).action(() => {
     if (action === 'config') {
       (0, _index.default)(action, ...process.argv.slice(3));
-    } else if (action === 'install') {
-      (0, _index.default)(action);
+    } else if (action === 'create') {
+      (0, _index.default)(action, ...process.argv.slice(3));
     }
   });
 });
@@ -47,7 +47,8 @@ function help() {
       console.log(" - " + example);
     });
   });
-}
+} // 监听
+
 
 _commander.default.on('-h', help);
 

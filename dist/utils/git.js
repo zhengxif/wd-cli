@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.downloadLoacal = exports.download = exports.repoList = exports.tagList = void 0;
+exports.downloadLoacal = exports.repoList = exports.tagList = void 0;
 
 var _requestPromise = _interopRequireDefault(require("request-promise"));
 
@@ -11,9 +11,13 @@ var _rc = require("./rc");
 
 var _downloadGitRepo = _interopRequireDefault(require("download-git-repo"));
 
+var _util = require("util");
+
 var _constants = require("./constants");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const downloadGit = (0, _util.promisify)(_downloadGitRepo.default);
 
 let fetch = async uri => {
   let config = {
@@ -51,30 +55,17 @@ let repoList = async () => {
 
 exports.repoList = repoList;
 
-let download = async (src, dest) => {
-  // 仓库地址  存放地址
-  return new Promise((resolve, reject) => {
-    (0, _downloadGitRepo.default)(src, dest, err => {
-      if (err) {
-        reject(err);
-      }
-
-      resolve();
-    });
-  });
-};
-
-exports.download = download;
-
 let downloadLoacal = async (project, version) => {
   let config = await (0, _rc.getAll)();
   let api = `${config.registry}/${project}`;
+  let dest = _constants.DOWNLOAD + '/' + project;
 
   if (version) {
     api += `#${version}`;
   }
 
-  return await download(api, _constants.DOWNLOAD + '/' + project);
+  await downloadGit(api, dest);
+  return dest;
 };
 
 exports.downloadLoacal = downloadLoacal;

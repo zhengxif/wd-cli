@@ -1,7 +1,11 @@
 import request from 'request-promise';
 import { getAll } from './rc';
-import downloadGit from 'download-git-repo';
+import download from 'download-git-repo';
+import { promisify } from 'util';
 import { DOWNLOAD } from './constants'
+
+const downloadGit = promisify(download);
+
 let fetch = async (uri) => {
     let config = {
         uri,
@@ -32,21 +36,13 @@ export let repoList = async () => {
 }
 
 // 下载模版
-export let download = async (src, dest) => { // 仓库地址  存放地址
-    return new Promise((resolve, reject) => {
-        downloadGit(src, dest, (err) => {
-            if (err) {
-                reject(err);
-            }
-            resolve()
-        })
-    })
-}
 export let downloadLoacal = async (project, version) => {
     let config = await getAll();
     let api = `${config.registry}/${project}`;
+    let dest = DOWNLOAD + '/' + project;
     if (version) {
         api += `#${version}`;
     }
-    return await download(api, DOWNLOAD + '/' + project);
+    await downloadGit(api, dest);
+    return dest;
 }
