@@ -1,6 +1,6 @@
 {
   "name": "wdian-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "url": "https://github.com/zhengxif/wd-cli/issues"
   },
   "homepage": "https://github.com/zhengxif/wd-cli#readme",
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
