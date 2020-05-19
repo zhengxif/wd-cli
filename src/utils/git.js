@@ -45,9 +45,10 @@ export let downloadLoacal = async (project, version) => {
         api += `#${version}`;
     }
     del.sync(
-        [dest],
+        [DOWNLOAD + '/'],
         {force: true}
     );
     await downloadGit(api, dest);
     return dest;
 }
+
