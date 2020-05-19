@@ -10,11 +10,11 @@ var _index = _interopRequireDefault(require("./index"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_commander.default.command('config [value]').description('inspect and modify the config').option('-g, --get <path>', 'get value from option').option('-s, --set <path> <value>', 'set option value').option('-d, --delete <path>', 'delete option from config').action(() => {
+_commander.default.command('config [value]').alias('conf').description('inspect and modify the config').option('-g, --get <path>', 'get value from option').option('-s, --set <path> <value>', 'set option value').option('-d, --delete <path>', 'delete option from config').action(() => {
   (0, _index.default)('config', ...process.argv.slice(3));
 });
 
-_commander.default.command('create <app-name>').description('create a new project powered by wd-cli').action(() => {
+_commander.default.command('create <app-name>').alias('c').description('create a new project powered by wd-cli').action(() => {
   (0, _index.default)('create', ...process.argv.slice(3));
 }); // output help information on unknown commands
 

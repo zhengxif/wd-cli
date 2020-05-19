@@ -6,6 +6,7 @@ import main from './index';
 
 program
     .command('config [value]')
+    .alias('conf')
     .description('inspect and modify the config')
     .option('-g, --get <path>', 'get value from option')
     .option('-s, --set <path> <value>', 'set option value')
@@ -16,6 +17,7 @@ program
 
 program
     .command('create <app-name>')
+    .alias('c')
     .description('create a new project powered by wd-cli')
     .action(() => {
         main('create', ...process.argv.slice(3))
