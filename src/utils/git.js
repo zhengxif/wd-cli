@@ -3,6 +3,7 @@ import { getAll } from './rc';
 import download from 'download-git-repo';
 import { promisify } from 'util';
 import { DOWNLOAD } from './constants'
+import del from 'del'
 
 const downloadGit = promisify(download);
 
@@ -43,6 +44,10 @@ export let downloadLoacal = async (project, version) => {
     if (version) {
         api += `#${version}`;
     }
+    del.sync(
+        [dest],
+        {force: true}
+    );
     await downloadGit(api, dest);
     return dest;
 }
