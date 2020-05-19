@@ -90,9 +90,9 @@ let create = async (projectName) => {
                                     files['package.json'].content = Buffer.from(content);
                                     delete files['package-template.json'];
                                 }
-                                if (file === '.eslintrc-templatete.json') { 
+                                if (file === '.eslintrc-template.js') { 
                                     files['.eslintrc.js'].content = Buffer.from(content);
-                                    delete files['.eslintrc-templatepackage-template.json'];
+                                    delete files['.eslintrc-template.js'];
                                 }
                             }
                         }
