@@ -1,5 +1,5 @@
 {
-  "name": "wdian-cli",
+  "name": "@vdian/wdian-cli",
   "version": "1.0.8",
   "description": "",
   "main": "index.js",
