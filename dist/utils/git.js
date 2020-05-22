@@ -15,6 +15,8 @@ var _util = require("util");
 
 var _constants = require("./constants");
 
+var _del = _interopRequireDefault(require("del"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const downloadGit = (0, _util.promisify)(_downloadGitRepo.default);
@@ -63,6 +65,10 @@ let downloadLoacal = async (project, version) => {
   if (version) {
     api += `#${version}`;
   }
+
+  _del.default.sync([_constants.DOWNLOAD + '/'], {
+    force: true
+  });
 
   await downloadGit(api, dest);
   return dest;
